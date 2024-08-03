@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ShoppingApp</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="warning">Dikkat</string>
+    <string name="areYouSure">Emin Misiniz ?</string>
+    <string name="anasayfa">Anasayfa</string>
+    <string name="addToCard">Add to Card</string>
+    <string name="discard">Discard</string>
+    <string name="dataNotfound">Veri Bulunamadı</string>
+    <string name="eMarket">E-Market</string>
+    <string name="detay">Detay Sayfası</string>
+    <string name="arama">Arama yapabilrsiniz...</string>
+    <string name="price">Price :</string>
+    <string name="eKasa">E-Kasa</string>
+</resources>
