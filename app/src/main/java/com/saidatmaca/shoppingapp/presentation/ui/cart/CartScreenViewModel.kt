@@ -35,6 +35,13 @@ class CartScreenViewModel @Inject constructor(
         _selectedIndex.value = int
     }
 
+    private val _totalPrice = mutableStateOf(0.0)
+    val totalPrice: State<Double> = _totalPrice
+
+    fun setTotalPrice(double: Double){
+        _totalPrice.value = double
+    }
+
     val favProductList : SnapshotStateList<FavProductModel> = mutableStateListOf()
     val cartProductList : SnapshotStateList<ProductModel> = mutableStateListOf()
 

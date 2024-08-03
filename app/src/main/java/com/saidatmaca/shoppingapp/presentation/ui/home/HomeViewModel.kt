@@ -1,6 +1,7 @@
 package com.saidatmaca.shoppingapp.presentation.ui.home
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -36,9 +37,17 @@ class HomeViewModel @Inject constructor(
 
 
     val productList : SnapshotStateList<ProductModel> = mutableStateListOf()
+   // val defaultProductList : SnapshotStateList<ProductModel> = mutableStateListOf()
     val favProductList : SnapshotStateList<FavProductModel> = mutableStateListOf()
     val cartProductList : SnapshotStateList<ProductModel> = mutableStateListOf()
 
+
+    private val _defaultList : MutableState<List<ProductModel>> = mutableStateOf(listOf())
+    val defaultList: State<List<ProductModel>> = _defaultList
+
+    fun setDefaultList(list: List<ProductModel>){
+        _defaultList.value=list
+    }
 
     private val _searchText = mutableStateOf("")
     val searchText: State<String> = _searchText
@@ -56,7 +65,25 @@ class HomeViewModel @Inject constructor(
 
     private var job: Job? = null
 
+    private val _selectedFilterType= mutableStateOf(0)
+    val selectedFilterType: State<Int> = _selectedFilterType
 
+    fun setSelectedFilterType(int: Int){
+        _selectedFilterType.value = int
+        if (int == 0){
+            productList.clear()
+            productList.addAll(_defaultList.value)
+
+        }else if (int == 1){
+            val tempList = _defaultList.value.sortedBy { it.price.toDouble() }
+            productList.clear()
+            productList.addAll(tempList)
+        }else{
+            val tempList = _defaultList.value.sortedByDescending { it.price.toDouble() }
+            productList.clear()
+            productList.addAll(tempList)
+        }
+    }
 
     fun goToCartScreen(navController: NavController){
         viewModelScope.launch {
@@ -79,6 +106,7 @@ class HomeViewModel @Inject constructor(
                             result.data?.let {
                                 productList.clear()
                                 productList.addAll(it)
+                                setDefaultList(it)
                             }
 
                             Log.e("productApiResponse",result.data.toString())

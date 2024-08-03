@@ -37,7 +37,10 @@ import com.saidatmaca.shoppingapp.presentation.ui.theme.FigmaColors
 private fun CartCompPreview() {
 
     CartComponent(model = DummyDataRepository.dummyProduct,
-        defaultCount =0 )
+        defaultCount =0,
+        currentPrice = {
+
+        })
 }
 
 
@@ -45,6 +48,7 @@ private fun CartCompPreview() {
 fun CartComponent(
     model: ProductModel,
     defaultCount : Int,
+    currentPrice:(Double) ->Unit
 
 ) {
 
@@ -62,6 +66,7 @@ fun CartComponent(
 
             priceValue = model.price.toDouble()
             priceValue *= count
+            currentPrice(priceValue)
         }catch (e:Exception){
             e.printStackTrace()
         }
@@ -103,6 +108,7 @@ fun CartComponent(
                 if (count>=1){
                     count -= 1
                     priceValue = model.price.toDouble()*count
+                    currentPrice(priceValue)
                 }
 
             },
@@ -146,6 +152,7 @@ fun CartComponent(
             Card(onClick = {
                 count += 1
                 priceValue =model.price.toDouble()*count
+                currentPrice(priceValue)
             },
                 shape = RoundedCornerShape(0.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),

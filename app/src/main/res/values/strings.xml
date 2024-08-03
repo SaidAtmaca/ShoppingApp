@@ -13,4 +13,10 @@
     <string name="arama">Arama yapabilrsiniz...</string>
     <string name="price">Price :</string>
     <string name="eKasa">E-Kasa</string>
+    <string name="complete">Complete</string>
+    <string name="search">Search</string>
+    <string name="filters">Filters:</string>
+    <string name="selectFilter">Select Filter</string>
+    <string name="fiyataGoreArtan">Fiyata Göre Artan</string>
+    <string name="fiyataGoreAzalan">Fiyata Göre Azalan</string>
 </resources>
